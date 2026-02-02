@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -41,7 +41,7 @@ export default function Login() {
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
-      <p>Don't have an account? <a href="/register">Register</a></p>
+      <p>Don't have an account? <Link to="/register">Register</Link></p>
     </>
   );
 }

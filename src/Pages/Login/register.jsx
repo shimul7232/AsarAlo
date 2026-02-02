@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -19,7 +19,7 @@ export default function Register() {
     const result = await register(name, email, password);
     if (result.success) {
       setSuccess("Registration successful");
-      navigate('/user/dashboard'); // New users are 'user' role
+      navigate('/user/dashboard'); 
     } else {
       setError(result.message);
     }
@@ -42,7 +42,7 @@ export default function Register() {
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
-      <p>Already have an account? <a href="/login">Login</a></p>
+      <p>Already have an account? <Link to="/login">Login</Link></p>
     </div>
   );
 }
