@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './navbar.css'
 
 function Navbar({ logo, links = [], user, onLogout }) {
@@ -15,9 +16,9 @@ function Navbar({ logo, links = [], user, onLogout }) {
 			<ul className="nav-links">
 				{links.map((l) => (
 					<li key={l.to || l.label} className="nav-item">
-						<a href={l.to || '#'} className="nav-link">
+						<Link to={l.to || '#'} className="nav-link">
 							{l.label}
-						</a>
+						</Link>
 					</li>
 				))}
 			</ul>
@@ -31,9 +32,9 @@ function Navbar({ logo, links = [], user, onLogout }) {
 						</button>
 					</>
 				) : (
-					<a href="/login" className="nav-login">
+					<Link to="/login" className="nav-login">
 						Login
-					</a>
+					</Link>
 				)}
 			</div>
 		</nav>
