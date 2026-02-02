@@ -1,0 +1,88 @@
+/* Doctor List Styles */
+.doctor-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.doctor-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 200ms ease;
+}
+
+.doctor-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.doctor-card-left {
+  flex-shrink: 0;
+}
+
+.doctor-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #f3f4f6;
+}
+
+.doctor-card-body {
+  flex: 1;
+}
+
+.doctor-card-body h3 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.05rem;
+  color: #111;
+}
+
+.doctor-card-body p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.specialization {
+  font-weight: 500;
+  color: #0b5fff;
+}
+
+.email {
+  color: #0b5fff;
+}
+
+.phone {
+  color: #666;
+}
+
+.status-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.error-message {
+  color: #e53e3e;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .doctor-card {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .doctor-image {
+    width: 100%;
+    height: auto;
+  }
+}

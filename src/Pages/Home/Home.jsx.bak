@@ -1,0 +1,35 @@
+
+
+import Navbar from "../../Components/NavigationMenu";
+
+
+export default function Home() {
+  return (
+    <div>
+      <Navbar 
+        links={[
+          { label: "Home", to: "/" },
+          { label: "About", to: "/about" },
+          { label: "Services", to: "/services" },
+          { label: "Contact", to: "/contact" }
+        ]}
+      />
+      {/*Show doctor data in home page*/}
+
+        <div className="heroSection">
+            <div className="HeroImage">
+                <img src="https://via.placeholder.com/1200x400" alt="Hero Image" />
+            </div>
+            <div className="doctorData">
+                <div className="Searchdoctor">
+                    <form action="">
+                        <input type="text" placeholder="Search for doctors..." />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+  );
+}
