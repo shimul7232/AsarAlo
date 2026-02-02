@@ -1,7 +1,9 @@
 
 
 import React, { useEffect, useState } from "react";
+  const [tests, setTests] = useState([]);
 import Navbar from "../../Components/NavigationMenu";
+  const [testQuery, setTestQuery] = useState("");
 import Input from "../../Components/InputFileds";
 import "./Home.module.css";
 
@@ -21,6 +23,20 @@ export default function Home() {
         const data = await res.json();
         setDoctors(data.doctors || []);
       } catch (err) {
+
+    const fetchTests = async () => {
+      try {
+        const res = await fetch("http://localhost:5001/api/medical-test-prices");
+        if (!res.ok) throw new Error("Failed to fetch tests");
+        const data = await res.json();
+        setTests(data.tests || []);
+      } catch (err) {
+        console.error("Fetch tests error:", err);
+      }
+    };
+
+    fetchDoctors();
+    fetchTests();
         setError(err.message || "Error fetching doctors");
         console.error("Fetch error:", err);
       } finally {
@@ -33,6 +49,16 @@ export default function Home() {
 
   // Real-time filtering as user types in search field
   const filtered = doctors.filter((d) => {
+  
+  const filteredTests = tests.filter((t) => {
+    if (!testQuery.trim()) return true;
+    const q = testQuery.toLowerCase();
+    return (
+      (t.testName && t.testName.toLowerCase().includes(q)) ||
+      (t.category && t.category.toLowerCase().includes(q)) ||
+      (t.description && t.description.toLowerCase().includes(q))
+    );
+  });
     if (!query.trim()) return true;
     const q = query.toLowerCase();
     return (
@@ -108,6 +134,40 @@ export default function Home() {
                           <p className="specialization">{d.specialization || "Specialist"}</p>
                           <p className="email">{d.email || "N/A"}</p>
                           {d.phone && <p className="phone">Phone: {d.phone}</p>}
+        </div>
+        
+        <div className="testSection">
+          <h2>Medical Tests</h2>
+          <div className="SearchTests">
+            <form onSubmit={(e) => e.preventDefault()}>
+              <Input
+                placeholder="Search tests by name, category or description..."
+                value={testQuery}
+                onChange={(e) => setTestQuery(e.target.value)}
+                size="lg"
+              />
+            </form>
+          </div>
+
+          <div className="ShowTestsData">
+            {tests.length === 0 ? (
+              <p className="status-message">No tests available.</p>
+            ) : (
+              <div className="test-list">
+                {filteredTests.map((t) => (
+                  <div key={t._id} className="test-card">
+                    <div className="test-card-body">
+                      <h3>{t.testName}</h3>
+                      <p className="category">{t.category || 'General'}</p>
+                      <p className="description">{t.description || ''}</p>
+                      <p className="price">Price: {typeof t.price === 'number' ? `₹${t.price}` : t.price}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
                         </div>
                       </div>
                     );
