@@ -1,0 +1,47 @@
+
+
+.dashboard-content{
+    width: 100%;
+    max-width: 100%;
+    height: fit-content;
+    max-height: fit-content;
+    display: flex;
+}
+.profileSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+}
+.profileSection img{
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.error-message{
+    color: red;
+    margin-top: 10px;
+}
+.success-message{
+    color: green;
+    margin-top: 10px;
+}
+.profileSection form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.Appionment-history{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: fit-content;
+}

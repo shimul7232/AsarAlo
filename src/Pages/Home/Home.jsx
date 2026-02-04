@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../Components/NavigationMenu";
 import Input from "../../Components/InputFileds";
 import axios from "axios";
-import "./Home.module.css";
+import "./Home.css";
+import DoctorCard from "../../Components/Cards/doctorCards/doctorcard";
+import heroImg from"../../assets/Images/hero.png"
 
 export default function Home() {
   const [doctors, setDoctors] = useState([]);
@@ -17,9 +19,10 @@ export default function Home() {
       setLoading(true);
       setError(null);
       try {
+        const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
         const [doctorsRes, testsRes] = await Promise.all([
-          axios.get("http://localhost:5001/api/doctors"),
-          axios.get("http://localhost:5001/api/medical-test-prices"),
+          axios.get(`${API_BASE}/api/doctors`),
+          axios.get(`${API_BASE}/api/medical-test-prices`),
         ]);
         setDoctors(doctorsRes.data.doctors || doctorsRes.data || []);
         setTests(testsRes.data.tests || testsRes.data || []);
@@ -53,7 +56,12 @@ export default function Home() {
     );
   });
 
-  const backendPrefix = (p) => (p && p.startsWith("http") ? p : `http://localhost:5001${p}`);
+  const backendPrefix = (p) => {
+    if (!p) return p;
+    if (p.startsWith("http")) return p;
+    const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+    return `${API_BASE}${p.startsWith("/") ? p : `/${p}`}`;
+  };
 
   return (
     <div>
@@ -68,7 +76,7 @@ export default function Home() {
 
       <div className="heroSection">
         <div className="HeroImage">
-          <img src="https://via.placeholder.com/1200x400" alt="Hero Image" />
+          <h1>Hospital</h1>
         </div>
 
         <div className="doctorData">
@@ -97,22 +105,22 @@ export default function Home() {
                   filteredDoctors.map((d) => {
                     const imageUrl = d.profilePicture ? backendPrefix(d.profilePicture) : "https://via.placeholder.com/80";
                     return (
-                      <div key={d._id} className="doctor-card">
+                      <div key={d._id} className="doctor-card-section">
                         <div className="doctor-card-left">
-                          <img
-                            src={imageUrl}
-                            alt={d.name || "Doctor"}
-                            className="doctor-image"
-                            onError={(e) => {
-                              e.target.src = "https://via.placeholder.com/80";
-                            }}
-                          />
+                          
                         </div>
                         <div className="doctor-card-body">
-                          <h3>{d.name || "N/A"}</h3>
-                          <p className="specialization">{d.specialization || "Specialist"}</p>
-                          <p className="email">{d.email || "N/A"}</p>
-                          {d.phone && <p className="phone">Phone: {d.phone}</p>}
+                          
+                          
+                          <DoctorCard
+                            doctorImage={imageUrl}
+                            Name={d.name || "N/A"}
+                            Spc={d.specialization || "N/A"}
+                            Routin={d.availableDays ? `Available: ${d.availableDays.join(", ")}` : "Availability: N/A"}
+                            email={d.email || "N/A"}
+                            img={imageUrl}
+                            doctorId={d._id}
+                          />
                         </div>
                       </div>
                     );
@@ -131,7 +139,7 @@ export default function Home() {
                 placeholder="Search tests by name, category or description..."
                 value={testQuery}
                 onChange={(e) => setTestQuery(e.target.value)}
-                size="lg"
+                size="md"
               />
             </form>
           </div>
@@ -146,7 +154,6 @@ export default function Home() {
                     <div className="test-card-body">
                       <h3>{t.testName}</h3>
                       <p className="category">{t.category || "General"}</p>
-                      <p className="description">{t.description || ""}</p>
                       <p className="price">Price: {typeof t.price === "number" ? `₹${t.price}` : t.price}</p>
                     </div>
                   </div>
@@ -155,6 +162,11 @@ export default function Home() {
             )}
           </div>
         </div>
+
+        <div className="footer">
+            <h3>Quick Links</h3>
+        </div>
+
       </div>
     </div>
   );

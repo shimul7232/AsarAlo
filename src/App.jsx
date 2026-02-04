@@ -5,7 +5,10 @@ import Register from './Pages/Login/register';
 import AdminDashboard from './Pages/AdminDashboard';
 import UserDashboard from './Pages/UserDashboard';
 import Home from './Pages/Home/Home';
-
+import About from './Pages/About/About';
+import Contact from './Pages/Contacts/Contact';
+import Services from './Pages/Services/Services';
+import Appionment from './Pages/Appiontment/Appoinment';
 function App() {
   return (
     <AuthProvider>
@@ -23,12 +26,16 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={!user? <Home/>:<Navigate to={"/user/dashboard"}/>} />
       <Route path="/login" element={!user ? <Login /> : <Navigate to={user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard'} />} />
       <Route path="/register" element={!user ? <Register /> : <Navigate to={user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard'} />} />
       <Route path="/admin/dashboard" element={user && user.role === 'admin' ? <AdminDashboard /> : <Navigate to="/login" />} />
       <Route path="/user/dashboard" element={user && user.role === 'user' ? <UserDashboard /> : <Navigate to="/login" />} />
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="/about" element={<About/>} />
+      <Route path="/contact" element={<Contact/>} />
+      <Route path="/services" element={<Services/>} />
+      <Route path="/bookAppionment" element={user? <Appionment/>:<Navigate to={'/'}/>}/>
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

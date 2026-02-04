@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-
+import Navbar from "../../Components/NavigationMenu";
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,8 +24,18 @@ export default function Register() {
       setError(result.message);
     }
   };
+  const{user}=useAuth()
 
   return (
+    <>
+            <Navbar
+        links={[
+  user ? { label: "Dashboard", to: "/user/dashboard" } : { label: "Home", to: "/" },
+  ...(user ? [{ label: "Doctors", to: "/bookAppionment" }] : []),
+  { label: "About", to: "/about" },
+  { label: "Services", to: "/services" },
+  { label: "Contact", to: "/contact" }
+]}/>
     <div>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
@@ -44,5 +54,6 @@ export default function Register() {
       {success && <p style={{ color: "green" }}>{success}</p>}
       <p>Already have an account? <Link to="/login">Login</Link></p>
     </div>
+    </>
   );
 }

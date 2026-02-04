@@ -4,28 +4,31 @@ import {
   getAppointmentById,
   createAppointment,
   updateAppointment,
-  deleteAppointment
+  deleteAppointment,
+  getMyAppointments
 } from "../controllers/appointment.controller.js";
-import { authenticateToken, requireAdmin } from "../middlewares/auth.middleware.js";
+
+import {
+  authenticateToken,
+  requireAdmin,
+  requireUser
+} from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-// All routes require admin
-router.use(authenticateToken, requireAdmin);
+// All routes need login
+router.use(authenticateToken);
 
-// Get all appointments
-router.get("/", getAllAppointments);
+// USER
+router.post("/",createAppointment);
+router.get("/my", requireUser, getMyAppointments);
 
-// Get appointment by ID
+// ADMIN
+router.get("/", requireAdmin, getAllAppointments);
+router.put("/:id", requireAdmin, updateAppointment);
+router.delete("/:id", requireAdmin, deleteAppointment);
+
+// SHARED
 router.get("/:id", getAppointmentById);
-
-// Create new appointment
-router.post("/", createAppointment);
-
-// Update appointment
-router.put("/:id", updateAppointment);
-
-// Delete appointment
-router.delete("/:id", deleteAppointment);
 
 export default router;

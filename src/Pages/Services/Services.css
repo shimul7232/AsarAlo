@@ -1,0 +1,34 @@
+.services-page {
+padding: 60px 20px;
+text-align: center;
+}
+
+
+.services-page h1 {
+margin-bottom: 40px;
+color: #0f172a;
+}
+
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 20px;
+}
+
+
+.service-card {
+background: linear-gradient(135deg, #2563eb, #1e40af);
+color: white;
+padding: 30px;
+border-radius: 16px;
+font-size: 1.1rem;
+font-weight: 500;
+box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+transition: transform 0.3s ease;
+}
+
+
+.service-card:hover {
+transform: translateY(-6px);
+}

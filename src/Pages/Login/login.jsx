@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-
+import Navbar from "../../Components/NavigationMenu";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,8 +25,18 @@ export default function Login() {
     }
   };
 
+  const{user}=useAuth()
+
   return (
     <>
+            <Navbar
+        links={[
+  user ? { label: "Dashboard", to: "/user/dashboard" } : { label: "Home", to: "/" },
+  ...(user ? [{ label: "Doctors", to: "/bookAppionment" }] : []),
+  { label: "About", to: "/about" },
+  { label: "Services", to: "/services" },
+  { label: "Contact", to: "/contact" }
+]}/>
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <label>Email</label><br />
