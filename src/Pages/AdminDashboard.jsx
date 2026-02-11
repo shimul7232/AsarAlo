@@ -497,6 +497,22 @@ export default function AdminDashboard() {
               <option value="admin">Admin</option>
             </select>
           </div>
+          <div style={baseStyle}>
+  <label style={labelStyle}>User Image</label>
+  <input
+    style={{ ...inputStyle, padding: '0.25rem' }}
+    type="file"
+    accept="image/*"
+    onChange={(e) => handleInputChange('profilePicture', e.target.files?.[0] || null)}
+  />
+  {formValues.profilePicture && (
+    <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '0.35rem' }}>
+      ✓ File selected: {typeof formValues.profilePicture === 'string' 
+        ? formValues.profilePicture.split('/').pop() 
+        : formValues.profilePicture?.name}
+    </p>
+  )}
+</div>
         </>
       );
     }

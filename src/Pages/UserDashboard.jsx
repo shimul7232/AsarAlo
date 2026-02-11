@@ -82,27 +82,34 @@ export default function UserDashboard() {
 
       <div className="dashboard-content">
         
-        {userData?.profilePicture && (
-          <div className='profileSection'>
-            <img
-              src={userData.profilePicture.startsWith('http') ? userData.profilePicture : `http://localhost:5001${userData.profilePicture}`}
-              alt="Profile"
-              width="150"
-            />
-            <form onSubmit={handleUpload}>
-          <input 
-            type="file" 
-            onChange={(e) => setFile(e.target.files[0])} 
-          />
-          <button type="submit">Upload Profile Picture</button>
-        </form>
+        
+  <div className='profileSection'>
+    {userData?.profilePicture && (
+      <img
+        src={userData.profilePicture.startsWith('http') 
+              ? userData.profilePicture 
+              : `http://localhost:5001${userData.profilePicture}`}
+        alt="Profile"
+        width="150"
+      />
+    )}
+    
+    <form onSubmit={handleUpload}>
+      <input 
+        type="file" 
+        accept="image/*"
+        onChange={(e) => setFile(e.target.files[0])} 
+      />
+      <button type="submit">Upload Profile Picture</button>
+    </form>
 
-        {error && <p className="error-message">{error}</p>}
-        {success && <p className="success-message">{success}</p>}  
-            <h2>Welcome, {userData?.name || 'User'}!</h2>
-            <p>Email: {userData?.email}</p>
-          </div>
-        )}
+    {error && <p className="error-message">{error}</p>}
+    {success && <p className="success-message">{success}</p>}  
+
+    <h2>Welcome, {userData?.name || 'User'}!</h2>
+    <p>Email: {userData?.email}</p>
+  </div>
+
 
         <div className='Appionment-history'>
           <h3>Your Appointment</h3>
