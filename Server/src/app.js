@@ -9,11 +9,17 @@ import userRoutes from './routes/user.routes.js';
 import appointmentRoutes from './routes/appointment.routes.js';
 import medicalTestPriceRoutes from './routes/medicalTestPrice.routes.js';
 import doctorRoutes from './routes/doctor.routes.js';
-
+import rateLimit from 'express-rate-limit';
 const app = express();
 
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: { message: "Too many requests from this IP, please try again later." }
+});
 app.use(cors());
 app.use(express.json());
+app.use(limiter)
 
 // Serve uploaded files
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));

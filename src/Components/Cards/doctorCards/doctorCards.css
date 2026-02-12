@@ -25,3 +25,13 @@
     outline: none;
     margin-top: 5px;
 }
+
+@media (max-width:740px) {
+    .doctor-card {
+        width: 100%;
+    }
+    .doctor-card img {
+        width: 100%;
+        height: auto;
+    }
+}

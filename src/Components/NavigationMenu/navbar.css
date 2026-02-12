@@ -118,6 +118,7 @@
     transform: translateY(-160%);
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
+    align-items: center;
   }
 
   .nav-links.active {

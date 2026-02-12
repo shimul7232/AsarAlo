@@ -5,7 +5,7 @@ import axios from "axios";
 import "./Home.css";
 import DoctorCard from "../../Components/Cards/doctorCards/doctorcard";
 import heroImg from"../../assets/Images/hero.png"
-
+import Footer from "../../Components/Footer/footer";
 export default function Home() {
   const [doctors, setDoctors] = useState([]);
   const [tests, setTests] = useState([]);
@@ -163,9 +163,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="footer">
-            <h3>Quick Links</h3>
-        </div>
+
+            <Footer/>
+
 
       </div>
     </div>

@@ -1,0 +1,28 @@
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: white;
+  background: black;
+  margin-top: 50px;
+
+  .copyright {
+    font-size: 14px;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 15px;
+  }
+
+  @media (max-width: 740px) {
+    flex-direction: column;
+    text-align: center;
+
+    .social-icons {
+      margin-top: 10px;
+    }
+  }
+}
