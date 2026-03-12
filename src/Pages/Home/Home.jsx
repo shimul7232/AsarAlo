@@ -19,7 +19,7 @@ export default function Home() {
       setLoading(true);
       setError(null);
       try {
-        const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+        const API_BASE = "https://asaralo.onrender.com";
         const [doctorsRes, testsRes] = await Promise.all([
           axios.get(`${API_BASE}/api/doctors`),
           axios.get(`${API_BASE}/api/medical-test-prices`),
