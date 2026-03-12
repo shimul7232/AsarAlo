@@ -9,6 +9,6 @@ const HOST = process.env.HOST || "0.0.0.0"; // <-- listen on all network interfa
 
 connectDB().then(() => {
   app.listen(PORT, HOST, () => 
-    console.log(`Server running on http://${HOST}:${PORT}`)
+    console.log(`Server running on http://0.0.0.0:${PORT}`)
   );
 });
