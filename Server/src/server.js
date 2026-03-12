@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || "0.0.0.0"; // <-- listen on all network interfaces
 
 connectDB().then(() => {
-  app.listen(PORT, 0.0.0.0, () => 
+  app.listen(PORT, '0.0.0.0', () => 
     console.log(`Server running on http://0.0.0.0:${PORT}`)
   );
 });
